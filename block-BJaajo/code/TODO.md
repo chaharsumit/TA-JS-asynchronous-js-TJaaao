@@ -8,6 +8,7 @@ setTimeout(() => console.log('Second'), 0);
 console.log('Third');
 ```
 
+![image](20211113_153839.jpeg);
 2.
 
 ```js
@@ -20,6 +21,7 @@ setTimeout(() => console.log('Third'), 0); // execute this code after 1000 ms
 console.log('Third');
 ```
 
+![image](20211113_153852.jpeg);
 3.
 
 ```js
@@ -32,6 +34,7 @@ setTimeout(() => console.log('Third'), 0);
 console.log('Fourth');
 ```
 
+![image](20211113_15903.jpeg);
 4.
 
 ```js
@@ -60,29 +63,37 @@ setTimeout(function exec() {
 }, 0);
 runWhileLoopForNSeconds(3);
 console.log('Third');
+
+// 0ms -> first
+// 1ms -> runWhileLoopForNSeconds(3)
+// 3.2ms -> third
+// 3.2ms -> second
 ```
 
 6. Convert the synchronous code given below into asynchronous. If you execute this code it will print one, two and three. Change the code in such a way that it should print `one`, `three` and `two`. You are not allowed to move the code up and down.
 
 ```js
 console.log('one');
-console.log('two');
+setTimeout(console.log('two'), 0);
 console.log('three');
 ```
 
 7. Convert the synchronous code given below into asynchronous. If you execute this code it will print one, two and three. Change the code in such a way that it should print `one`, `three` and `two`. You are not allowed to move the code up and down.
 
 ```js
-console.log('one');
-console.log('two');
+setTimeout(() => {console.log('one')}, 0);
+setTimeout(() => {console.log('two')}, 0);
 console.log('three');
 ```
 
 8. Write a function named `asyncForEach` that is similar to `forEach`. But `asyncForEach` is asynchronous in nature rather than synchronous.
 
 ```js
-funciton asyncForEach(){
-  //
+function asyncForEach(arr){
+  setTimeout(() => {
+    for(item of arr){
+      console.log(item);
+  }}, 0);
 }
 //  Output of the function below should be
 // one
@@ -108,6 +119,6 @@ Convert the code below in such way that the output should be the one below
 
 ```js
 console.log('First Call');
-[1, 2, 3, 4, 5].firEach((num) => console.log(num));
+setTimeout(() => {[1, 2, 3, 4, 5].forEach((num) => console.log(num))}, 0);
 console.log('Last Call');
 ```
