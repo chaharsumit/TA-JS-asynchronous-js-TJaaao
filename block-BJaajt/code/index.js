@@ -27,6 +27,8 @@ xhr.onloadend = function(){
 xhr.send();
 */
 
+/********************** ----- GITHUB USER FINDER ----- **********************/
+
 let userName = document.querySelector('h3');
 let nameUser = document.querySelector('h1');
 let avatar = document.querySelector('.avatar');
@@ -84,5 +86,24 @@ function hadnleFetchRequestForFollowing(n){
       followingItems[i].src = userData[i].avatar_url;
     }
   }
+  xhr.send();
+}
+
+/********************** ----- GITHUB USER FINDER ----- **********************/
+
+// Random cat API
+
+let button = document.querySelector('button');
+let catImage = document.querySelector('.cat-image');
+
+button.addEventListener('click', handleCats);
+
+function handleCats(){
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.thecatapi.com/v1/images/search?limit=1&size=full');
+  xhr.onload = function(){
+    let catData = JSON.parse(xhr.response);
+    catImage.src = catData[0].url;  
+  };
   xhr.send();
 }
