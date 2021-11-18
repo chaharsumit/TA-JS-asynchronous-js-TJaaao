@@ -3,13 +3,42 @@ let newsSection = document.querySelector("section");
 let select = document.querySelector("select");
 let allNews = [];
 
-let data = fetch(url)
-  .then(res => res.json())
-  .then(news => {
-    allNews = news;
-    createNewsArticle(news);
-    createSelectMenu(news, createSelectMenuData(news));
-  });
+let main = document.querySelector('main');
+let message = document.querySelector('.message');
+
+function handleError(errorMessage = 'Something went wrong'){
+  main.style.display = 'none';
+  message.style.display = 'block';
+  message.innerText = errorMessage;
+}
+
+function handleLoader(status = false) {
+  if (status) {
+    newsSection.innerHTML = `<div class="loader"></div>`;
+  }
+}
+
+function init() {
+  handleLoader(true);
+  fetch(url)
+    .then(res => {
+      if(res.ok){
+        return res.json();
+      }else{
+        throw new Error('Error something went wrong');
+      }
+    })
+    .then(news => {
+      handleLoader();
+      allNews = news;
+      createNewsArticle(news);
+      createSelectMenu(news, createSelectMenuData(news));
+    }).catch((error) => {
+      handleError(error);
+    }).finally(() => {
+      handleLoader();
+    })
+}
 
 function createSelectMenu(news, newsSites) {
   newsSites.forEach(newsSite => {
@@ -64,6 +93,11 @@ function createNewsForSelectedOption(event) {
 
 select.addEventListener("change", createNewsForSelectedOption);
 
+if(navigator.onLine){
+  init();
+}else{
+  handleError('Check your internet connection');
+}
 /*
 <article class="news-article flex">
         <div class="image-container">
