@@ -1,17 +1,3 @@
- 
-
-Promise.race(new Promise((resolve, reject) => {
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://random.dog/woof.json`);
-  xhr.onload = resolve('promise1');
-  xhr.send();
-}), new Promise((resolve, reject) => {
-  let xhr = new XMLHttpRequest();
-  xhr.open('GET', `https://aws.random.cat/meow`);
-  xhr.onload = resolve('promise2');
-  xhr.send();
-})).then(alert);
-
 /*
 - Create four promises that resolve after 1, 2, 3 and 4 seconds with a random value. Using `Promise.all` log the value of each promise that it resolved with.
 
@@ -63,17 +49,34 @@ let allPromises = Promise.all([p1,p2,p3,p4]).then((res) => {
 
 - Create a list of 5 Github usernames in an array and using `Promise.all` get access to the data of each user from GitHub API. Log the number of followers of each user.
 
-
 let userNames = ['chaharsumit','shivamsinghchahar','akashprasher','getify','gaearon'];
 
-let data = Promise.all(userNames.map((user) => fetch(`https://api.github.com/users/${user}`).then(res => res.json()))).then(users => console.log(users));
-
+let data = Promise.all(userNames.map((user) => fetch(`https://api.github.com/users/${user}`).then(res => res.json()))).then(users => {
+  users.forEach(elm => console.log(elm.followers)); 
+});
 
 
 - Use `Promise.race` to see which API resolves faster from the given list of URLs. Log the object you get from the promise that is resolved faster.
 
   - https://random.dog/woof.json
   - https://aws.random.cat/meow
+
+  let newPromise1 = new Promise((resolve, reject) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://random.dog/woof.json`);
+  xhr.onload = resolve('promise1');
+  });
+
+  let newPromise2 = new Promise((resolve, reject) => {
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', `https://aws.random.cat/meow`);
+  xhr.onload = resolve('promise1');
+  });
+
+  Promise.race([newPromise1, newPromise2]).then(console.log);
+
+
+
 
 - Use `Promise.allSettled` to log the value of each promise from the given list of promises. And also check if `Promise.all` works with `one`, `two` and `three` or not
 
@@ -87,6 +90,9 @@ const two = new Promise((resolve, reject) =>
 const three = new Promise((resolve, reject) =>
   setTimeout(() => resolve('John'), 3000)
 );
+
+Promise.all([one,two,three]).then(console.log);
+Promise.allSettled([one,two,three]).then(console.log);
 ```
 
 - What will be the output of the following code snippet? How much time will it take for the promise to resolve?
@@ -99,5 +105,7 @@ Promise.all([
   'Sam',
   { name: 'John' },
 ]).then(console.log);
+
+// It will take 1 second to get resolved 
 ```
 */
