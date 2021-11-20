@@ -35,13 +35,10 @@ function handleLoaderForUI(status = false){
 function handleLoaderForCharactersUI(status = false){
   if(status){
     characterList.innerHTML = `<div class="loader"></div>`;
-  }else{
-    characterList.innerHTML = '';
   }
 }
 
 function handleClick(event){
-  characterList.innerHTML = '';
   fetchCharacters(booksDataCollection[event.target.dataset.key].characters);
   booksContainer.style.display = 'none';
   characterWrapper.style.display = 'block';
