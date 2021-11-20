@@ -1,3 +1,34 @@
+function promiseAll() {
+  
+}
+
+// Test:
+let times = [1, 2, 3, 4];
+let timesPromise = times.map(
+  (second) =>
+    new Promise((res) => {
+      setTimeout(() => res(Math.random()), second * 1000);
+    })
+);
+
+promiseAll(timesPromise).then(console.log);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 - Create four promises that resolve after 1, 2, 3 and 4 seconds with a random value. Using `Promise.all` log the value of each promise that it resolved with.
 
