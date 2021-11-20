@@ -5,7 +5,7 @@
 }
 
 body{
-  background-image: linear-gradient(to bottom right, rgb(241, 126, 126), blueviolet);
+  background-color: rgb(199, 71, 156);
   line-height: 1.5;
   font-family: Arial, Helvetica, sans-serif;
   position: relative;
@@ -52,9 +52,8 @@ a{
 .character-wrapper{
   position: fixed;
   top: 0;
-  left: 20%;
-  width: 1200px;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: white;
   padding: 2rem;
   overflow: scroll;
@@ -80,5 +79,21 @@ li{
 #cross:hover, a:hover{
   cursor: pointer;
   box-shadow: 0 0 1rem black;
+}
+
+.loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 25% auto;
+  animation: spin 0.5s linear infinite;
+  display: flex;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
